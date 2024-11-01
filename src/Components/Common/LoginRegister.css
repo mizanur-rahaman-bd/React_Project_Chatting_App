@@ -1,66 +1,64 @@
-.account{
-    @apply bg-Brand_Color flex justify-between relative
+.account {
+  @apply bg-Brand_Color flex justify-between relative;
 }
-.account_text_img_col h2{
-    @apply font-poppin font-semibold text-[15px] lg:text-[30px] text-white ml-[15px] lg:ml-[30px] mt-[60px] lg:mt-[154px]
+.account_text_img_col h2 {
+  @apply font-poppin font-semibold text-[15px] lg:text-[30px] text-white ml-[15px] lg:ml-[30px] mt-[60px] lg:mt-[154px];
 }
-.home_page_img img{
-    @apply absolute left-[-81] top-[287px] w-[200px] lg:w-[622px] h-[100px] lg:h-[500px] animate-spin-slow
-    
+.home_page_img img {
+  @apply absolute left-[-81] top-[287px] w-[200px] lg:w-[622px] h-[100px] lg:h-[500px] animate-spin-slow;
 }
-.account_form_col{
-    @apply bg-white w-[200px] lg:w-[948px] rounded-tl-[50px] rounded-bl-[50px] pr-1 lg:pr-[150px] pl-[30px] lg:pl-[90px]  
+.account_form_col {
+  @apply bg-white w-[200px] lg:w-[948px] rounded-tl-[50px] rounded-bl-[50px] pr-1 lg:pr-[150px] pl-[30px] lg:pl-[90px];
 }
-.user_name input{
-    @apply outline-none mb-[20px] lg:mb-[42px] w-[250px] lg:w-[500px] h-[40px];
-    border-bottom: solid 2px #A6A6A6;
+.user_name input {
+  @apply outline-none mb-[20px] lg:mb-[42px] w-[250px] lg:w-[500px] h-[40px];
+  border-bottom: solid 2px #a6a6a6;
 }
-.user_email input{
-    @apply outline-none mb-[20px] lg:mb-[42px] w-[250px] lg:w-[500px] h-[40px];
-    border-bottom: solid 2px #A6A6A6;
+.user_email input {
+  @apply outline-none mb-[20px] lg:mb-[42px] w-[250px] lg:w-[500px] h-[40px];
+  border-bottom: solid 2px #a6a6a6;
 }
-.password input{
-    @apply outline-none mb-[20px] lg:mb-[42px] w-[250px] lg:w-[500px] h-[40px];
-    border-bottom: solid 2px #A6A6A6;
+.password input {
+  @apply outline-none mb-[20px] lg:mb-[42px] w-[250px] lg:w-[500px] h-[40px];
+  border-bottom: solid 2px #a6a6a6;
 }
-.language_selector{
-    @apply mt-[20px] lg:mt-[45px] mr-[60px] lg:mr-[112px] font-poppin font-semibold text-[14px] lg:text-[18px] text-[#AFAFAF]
+.language_selector {
+  @apply mt-[20px] lg:mt-[45px] mr-[60px] lg:mr-[112px] font-poppin font-semibold text-[14px] lg:text-[18px] text-[#AFAFAF];
 }
-#language_selec{
-    @apply absolute right-6
+#language_selec {
+  @apply absolute right-6;
 }
-.heading h1{
-    @apply font-poppin font-bold text-[25px] lg:text-[48px] text-black text-center mt-[50px] lg:mt-[109px] mb-[20px] lg:mb-[51px]
+.heading h1 {
+  @apply font-poppin font-bold text-[25px] lg:text-[48px] text-black text-center mt-[50px] lg:mt-[109px] mb-[20px] lg:mb-[51px];
 }
-.other_account_login_access{
-    @apply flex gap-[5px] lg:gap-[54px] justify-center items-center
+.other_account_login_access {
+  @apply flex gap-[5px] lg:gap-[54px] justify-center items-center;
 }
-.google button{
-    @apply w-[80px] lg:w-[314px] h-[67px] rounded-2xl flex items-center gap-[8px] lg:gap-[17px];
-    border: solid 2px #A6A6A6;
+.google button {
+  @apply w-[80px] lg:w-[314px] h-[67px] rounded-2xl flex items-center gap-[8px] lg:gap-[17px];
+  border: solid 2px #a6a6a6;
 }
-.fb button{
-    @apply w-[80px] lg:w-[314px] h-[67px] rounded-2xl flex items-center gap-[8px] lg:gap-[17px];
-    border: solid 2px #A6A6A6;
+.fb button {
+  @apply w-[80px] lg:w-[314px] h-[67px] rounded-2xl flex items-center gap-[8px] lg:gap-[17px];
+  border: solid 2px #a6a6a6;
 }
-.google button img{
-    @apply pl-[7px] lg:pl-[14px] w-[20px] lg:w-[38px] h-[20px] lg:h-[37px]
+.google button img {
+  @apply pl-[7px] lg:pl-[14px] w-[20px] lg:w-[38px] h-[20px] lg:h-[37px];
 }
-.fb button img{
-    @apply pl-[7px] lg:pl-[14px] w-[20px] lg:w-[50px] h-[20px] lg:h-[48px]
+.fb button img {
+  @apply pl-[7px] lg:pl-[14px] w-[20px] lg:w-[50px] h-[20px] lg:h-[48px];
 }
-.register_form_info{
-   
+.register_form_info {
 }
-.register_form_input{
-    @apply w-[526px] h-[40px] flex flex-col gap-[42px] mx-auto 
+.register_form_input {
+  @apply w-[526px] h-[40px] flex flex-col gap-[42px] mx-auto;
 }
-.user_info_submit_button button{
-    @apply px-[10px] lg:px-[142px] py-[5px] lg:py-[15px] bg-Brand_Color text-white font-poppin font-bold text-[15px] lg:text-[30px] rounded-[25px] mb-[41px]
+.user_info_submit_button button {
+  @apply px-[10px] lg:px-[142px] py-[5px] lg:py-[15px] bg-Brand_Color text-white font-poppin font-bold text-[15px] lg:text-[30px] rounded-[25px] mb-[41px];
 }
-.user_info_submit_button button:hover{
-    @apply bg-lime-600 text-black
+.user_info_submit_button button:hover {
+  @apply bg-lime-600 text-black;
 }
-.user_account_login p{
-    @apply font-poppin font-medium text-[12px] lg:text-[26px] text-[#A6A6A6] pb-[119px]
+.user_account_login p {
+  @apply font-poppin font-medium text-[12px] lg:text-[26px] text-[#A6A6A6] pb-[119px];
 }
