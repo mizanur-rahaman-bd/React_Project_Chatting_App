@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { IoEyeOutline } from "react-icons/io5";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
@@ -12,8 +13,13 @@ const Register = () => {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passWordError, setPassWordError] = useState("");
+  const [show, setShow] = useState(false);
 
   // Function Part
+  const handleShow = () => {
+    setShow(!show);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
@@ -107,10 +113,21 @@ const Register = () => {
                   onChange={(e) => {
                     setPassword(e.target.value), setPassWordError("");
                   }}
-                  type="password "
+                  type={show ? "text" : "password"}
                   placeholder="Password"
                 />
-                <FaRegEyeSlash className=" absolute right-[20px] lg:right-[100px] top-4" />
+                {show ? (
+                  <IoEyeOutline
+                    onClick={handleShow}
+                    className="absolute right-[20px] lg:right-[100px] top-4"
+                  />
+                ) : (
+                  <FaRegEyeSlash
+                    onClick={handleShow}
+                    className=" absolute right-[20px] lg:right-[100px] top-4"
+                  />
+                )}
+
                 <p className="font-poppin font-medium text-[15px] text-red-700">
                   {passWordError}
                 </p>
