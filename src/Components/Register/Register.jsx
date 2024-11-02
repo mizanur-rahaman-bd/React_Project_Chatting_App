@@ -4,9 +4,28 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
+  // variable part
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passWordError, setPassWordError] = useState("");
+
+  // Function Part
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name) {
+      setNameError("Enter Your Name");
+    }
+    if (!email) {
+      setEmailError("Enter Your Email");
+    }
+    if (!password) {
+      setPassWordError("Enter Your Password");
+    }
+  };
 
   return (
     <>
@@ -60,18 +79,47 @@ const Register = () => {
           <div className="register_form">
             <form className="register_form_info">
               <div className="user_name text-center">
-                <input type="text" placeholder="Full name" />
+                <input
+                  onChange={(e) => {
+                    setName(e.target.value), setNameError("");
+                  }}
+                  type="text"
+                  placeholder="Full name"
+                />
+                <p className="font-poppin font-medium text-[15px] text-red-700">
+                  {nameError}
+                </p>
               </div>
               <div className="user_email text-center">
-                <input type="email" placeholder="Email Address" />
+                <input
+                  onChange={(e) => {
+                    setEmail(e.target.value), setEmailError("");
+                  }}
+                  type="email"
+                  placeholder="Email Address"
+                />
+                <p className="font-poppin font-medium text-[15px] text-red-700">
+                  {emailError}
+                </p>
               </div>
               <div className="password text-center relative ">
-                <input type="password " placeholder="Password" />
+                <input
+                  onChange={(e) => {
+                    setPassword(e.target.value), setPassWordError("");
+                  }}
+                  type="password "
+                  placeholder="Password"
+                />
                 <FaRegEyeSlash className=" absolute right-[20px] lg:right-[100px] top-4" />
+                <p className="font-poppin font-medium text-[15px] text-red-700">
+                  {passWordError}
+                </p>
               </div>
 
               <div className="user_info_submit_button text-center">
-                <button type="submit">Create Account</button>
+                <button onClick={handleSubmit} type="submit">
+                  Create Account
+                </button>
               </div>
               <div className="user_account_login text-center">
                 <p>
