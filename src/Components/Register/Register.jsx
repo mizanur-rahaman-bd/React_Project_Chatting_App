@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import "react-toastify/dist/ReactToastify.css";
+import { Bounce, toast } from "react-toastify";
 
 const Register = () => {
   // variable part
@@ -14,6 +20,9 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passWordError, setPassWordError] = useState("");
   const [show, setShow] = useState(false);
+
+  // FireBase Variable
+  const auth = getAuth();
 
   // Function Part
   const handleShow = () => {
@@ -30,6 +39,42 @@ const Register = () => {
     }
     if (!password) {
       setPassWordError("Enter Your Password");
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          sendEmailVerification(auth.currentUser).then(() => {
+            toast.info("Verify Your Email", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Bounce,
+            });
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode == "auth/email-already-in-use") {
+            toast.error("Email Already Taken", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Bounce,
+            });
+          }
+        });
     }
   };
 

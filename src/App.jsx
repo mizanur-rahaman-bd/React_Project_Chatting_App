@@ -9,6 +9,7 @@ import {
 import Register from "./Components/Register/Register";
 import Login from "./Components/Login/Login";
 import app from "./firebase.config";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const myRoute = createBrowserRouter(
@@ -23,6 +24,7 @@ function App() {
   return (
     <>
       <RouterProvider router={myRoute} />
+      <ToastContainer />
     </>
   );
 }

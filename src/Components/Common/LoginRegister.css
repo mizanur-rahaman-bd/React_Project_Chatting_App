@@ -59,6 +59,9 @@
 .user_info_submit_button button:hover {
   @apply bg-lime-600 text-black;
 }
+.user_info_submit_button button:active {
+  @apply scale-110;
+}
 .user_account_login p {
   @apply font-poppin font-medium text-[12px] lg:text-[26px] text-[#A6A6A6] pb-[119px];
 }
