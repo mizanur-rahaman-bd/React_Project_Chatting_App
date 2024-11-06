@@ -38,9 +38,15 @@
   @apply w-[80px] lg:w-[314px] h-[67px] rounded-2xl flex items-center gap-[8px] lg:gap-[17px];
   border: solid 2px #a6a6a6;
 }
+.google button:hover {
+  @apply bg-gray-200;
+}
 .fb button {
   @apply w-[80px] lg:w-[314px] h-[67px] rounded-2xl flex items-center gap-[8px] lg:gap-[17px];
   border: solid 2px #a6a6a6;
+}
+.fb button:hover {
+  @apply bg-gray-200;
 }
 .google button img {
   @apply pl-[7px] lg:pl-[14px] w-[20px] lg:w-[38px] h-[20px] lg:h-[37px];

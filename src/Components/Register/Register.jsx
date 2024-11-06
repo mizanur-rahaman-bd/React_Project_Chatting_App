@@ -6,9 +6,15 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
+  signInWithPopup,
 } from "firebase/auth";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce, toast } from "react-toastify";
+import { CSSProperties } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+import { GoogleAuthProvider } from "firebase/auth";
+import { FacebookAuthProvider } from "firebase/auth";
 
 const Register = () => {
   // variable part
@@ -20,9 +26,12 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passWordError, setPassWordError] = useState("");
   const [show, setShow] = useState(false);
+  const [loading, setLoding] = useState(false);
 
   // FireBase Variable
   const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  const fbprovider = new FacebookAuthProvider();
 
   // Function Part
   const handleShow = () => {
@@ -30,6 +39,7 @@ const Register = () => {
   };
 
   const handleSubmit = (e) => {
+    setLoding(true);
     e.preventDefault();
     if (!name) {
       setNameError("Enter Your Name");
@@ -45,6 +55,7 @@ const Register = () => {
           // Signed up
           const user = userCredential.user;
           sendEmailVerification(auth.currentUser).then(() => {
+            setLoding(false);
             toast.info("Verify Your Email", {
               position: "top-center",
               autoClose: 5000,
@@ -56,9 +67,24 @@ const Register = () => {
               theme: "dark",
               transition: Bounce,
             });
+            // set user name and profile pic
+            updateProfile(auth.currentUser, {
+              displayName: name,
+              photoURL:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-HmAlYRaMiTx6PqSGcL9ifkAFxWHVPvhiHQ&s",
+            })
+              .then(() => {
+                // Profile updated!
+                // ...
+              })
+              .catch((error) => {
+                // An error occurred
+                // ...
+              });
           });
         })
         .catch((error) => {
+          setLoding(false);
           const errorCode = error.code;
           const errorMessage = error.message;
           if (errorCode == "auth/email-already-in-use") {
@@ -76,6 +102,56 @@ const Register = () => {
           }
         });
     }
+  };
+  // google sign in button
+  const handleGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
+
+  // fb sign in button
+  const handleFb = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = FacebookAuthProvider.credentialFromError(error);
+
+        // ...
+      });
   };
 
   return (
@@ -108,7 +184,7 @@ const Register = () => {
           </div>
           <div className="other_account_login_access">
             <div className="google">
-              <button>
+              <button onClick={handleGoogle}>
                 <img src="images/googleLogo.png" alt="google" />{" "}
                 <p className="font-poppin font-medium text-[8px] lg:text-[18px]">
                   Sign up with google
@@ -179,9 +255,15 @@ const Register = () => {
               </div>
 
               <div className="user_info_submit_button text-center">
-                <button onClick={handleSubmit} type="submit">
-                  Create Account
-                </button>
+                {loading ? (
+                  <button onClick={handleSubmit} type="submit">
+                    <ClipLoader color="red" />
+                  </button>
+                ) : (
+                  <button onClick={handleSubmit} type="submit">
+                    Create Account
+                  </button>
+                )}
               </div>
               <div className="user_account_login text-center">
                 <p>
