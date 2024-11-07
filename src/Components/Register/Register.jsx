@@ -74,6 +74,7 @@ const Register = () => {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-HmAlYRaMiTx6PqSGcL9ifkAFxWHVPvhiHQ&s",
             })
               .then(() => {
+                navigate("/login");
                 // Profile updated!
                 // ...
               })
@@ -105,31 +106,31 @@ const Register = () => {
   };
   // google sign in button
   const handleGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
+    signInWithPopup(auth, provider);
+    then((result) => {
+      navigate("/");
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+    });
   };
 
   // fb sign in button
   const handleFb = () => {
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, fbprovider)
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
@@ -192,7 +193,7 @@ const Register = () => {
               </button>
             </div>
             <div className="fb">
-              <button>
+              <button onClick={handleFb}>
                 <img src="images/fblogo.png" alt="fb" />
                 <p className="font-poppin font-medium text-[8px] lg:text-[18px]">
                   Sign up with Facebook
@@ -269,7 +270,7 @@ const Register = () => {
                 <p>
                   Already have an account?{" "}
                   <span
-                    onClick={() => navigate("./login")}
+                    onClick={() => navigate("/login")}
                     className="text-Brand_Color"
                   >
                     Login

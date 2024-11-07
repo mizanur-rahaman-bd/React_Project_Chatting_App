@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast, Zoom } from "react-toastify";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
   // variable part
@@ -9,6 +12,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passWordError, setPassWordError] = useState("");
+
+  // FireBase Variable
+  const auth = getAuth();
 
   // function part
   const handleShow = () => {
@@ -22,6 +28,18 @@ const Login = () => {
     }
     if (!password) {
       setPassWordError("Enter Your Password");
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          Navigate("/");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
     }
   };
 
