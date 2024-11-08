@@ -3,10 +3,11 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast, Zoom } from "react-toastify";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
   // variable part
+  const Navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,12 +34,52 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          Navigate("/");
           // ...
+          console.log(user);
+          if (user.emailVerified === false) {
+            toast.error("Your Email is not Varified", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Zoom,
+            });
+          } else {
+            Navigate("/home");
+            toast.success("Wlcome to Gracias", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Zoom,
+            });
+          }
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          if (errorCode == "auth/invalid-credential") {
+            toast.warn("Something Went Wrong", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Zoom,
+            });
+          }
+          console.log(errorCode);
         });
     }
   };
