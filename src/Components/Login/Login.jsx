@@ -3,7 +3,9 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast, Zoom } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userData } from "../../Slices/UserSlice";
 
 const Login = () => {
   // variable part
@@ -16,6 +18,9 @@ const Login = () => {
 
   // FireBase Variable
   const auth = getAuth();
+
+  // Redux variable
+  const dispatch = useDispatch();
 
   // function part
   const handleShow = () => {
@@ -35,7 +40,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           // ...
-          console.log(user);
+          // console.log(user);
           if (user.emailVerified === false) {
             toast.error("Your Email is not Varified", {
               position: "top-center",
@@ -50,6 +55,12 @@ const Login = () => {
             });
           } else {
             Navigate("/home");
+            // set data to the redux
+            dispatch(userData(userCredential.user));
+
+            // set data to the local storage
+            localStorage.setItem("user", JSON.stringify(userCredential.user));
+
             toast.success("Wlcome to Gracias", {
               position: "top-center",
               autoClose: 5000,
@@ -111,7 +122,9 @@ const Login = () => {
               </div>
               <div className="password_row flex justify-between mt-[24px] mb-[12px] text-[16px] font-normal relative">
                 <h2>Password</h2>
-                <p className="text-blue-400">Forgot？</p>
+                <Link to={"/forgetpassword"} className="text-blue-400">
+                  Forgot？
+                </Link>
               </div>
               <input
                 onChange={(e) => {

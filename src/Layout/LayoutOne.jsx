@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import User from "../Components/User/User";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
-const Home = () => {
+const LayoutOne = () => {
   const sliceUser = useSelector((state) => state.currentUser.value);
   const navigate = useNavigate();
 
@@ -15,11 +14,9 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-full h-screen bg-slate-500 m-auto flex justify-center items-center">
-        <User />
-      </div>
+      <Outlet />
     </>
   );
 };
 
-export default Home;
+export default LayoutOne;
