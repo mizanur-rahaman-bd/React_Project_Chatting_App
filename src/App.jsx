@@ -19,10 +19,10 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route path="/" element={<LayoutOne />}>
-          <Route index element={<Register />} />
+          <Route index element={<Home />} />
         </Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/register" element={<Register />}></Route>
         <Route path="/forgetpassword" element={<ForgetPassWord />}></Route>
       </Route>
     )

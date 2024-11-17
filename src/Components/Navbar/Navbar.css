@@ -1,3 +1,15 @@
 .navbar {
-  @apply p-8 shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] absolute top-[50%] right-5 translate-y-[-50%];
+  @apply p-8 shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] absolute top-[50%] right-5 translate-y-[-50%] flex flex-col gap-5 items-center rounded-[10px];
+}
+.navbar a {
+  @apply text-[30px];
+}
+.navbar a:hover {
+  @apply scale-125 text-Brand_Color;
+}
+.button {
+  @apply text-[30px];
+}
+.button:hover {
+  @apply text-Brand_Color scale-125;
 }

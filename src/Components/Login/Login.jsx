@@ -54,7 +54,7 @@ const Login = () => {
               transition: Zoom,
             });
           } else {
-            Navigate("/home");
+            Navigate("/");
             // set data to the redux
             dispatch(userData(userCredential.user));
 

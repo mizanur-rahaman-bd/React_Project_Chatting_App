@@ -4,19 +4,18 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
 
 const LayoutOne = () => {
-  // const sliceUser = useSelector((state) => state.currentUser.value);
-  // const navigate = useNavigate();
+  const sliceUser = useSelector((state) => state.currentUser.value);
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (sliceUser == null) {
-  //     navigate("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (sliceUser == null) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <>
       <Navbar />
-
       <Outlet />
     </>
   );
