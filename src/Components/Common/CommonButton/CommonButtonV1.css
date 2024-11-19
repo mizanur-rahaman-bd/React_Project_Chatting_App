@@ -1,0 +1,12 @@
+.commonButtonV1 {
+  @apply flex gap-6 items-center;
+}
+.commonButtonV1 button {
+  @apply py-2 px-5 font-poppin font-medium text-black text-[20px] rounded-xl bg-Brand_Color;
+}
+.commonButtonV1 button:hover {
+  @apply bg-slate-600 text-zinc-100;
+}
+.commonButtonV1 button:active {
+  @apply scale-110;
+}
