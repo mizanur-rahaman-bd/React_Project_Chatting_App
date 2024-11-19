@@ -1,0 +1,6 @@
+.common_User{
+    @apply flex gap-5 items-center
+}
+.common_user_img{
+    @apply w-[50px] h-[50px] rounded-full overflow-hidden bg-gray-200
+}

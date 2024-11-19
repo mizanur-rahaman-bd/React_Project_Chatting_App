@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar">
-        <Link to={""}>
+        <Link to={"/allusers"}>
           <FaUser />
         </Link>
         <Link to={""}>
