@@ -6,6 +6,7 @@ import { toast, Zoom } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userData } from "../../Slices/UserSlice";
+import { getDatabase, ref, set } from "firebase/database";
 
 const Login = () => {
   // variable part
@@ -18,6 +19,7 @@ const Login = () => {
 
   // FireBase Variable
   const auth = getAuth();
+  const db = getDatabase();
 
   // Redux variable
   const dispatch = useDispatch();
@@ -60,6 +62,12 @@ const Login = () => {
 
             // set data to the local storage
             localStorage.setItem("user", JSON.stringify(userCredential.user));
+
+            // set user
+            set(ref(db, "allusers/" + userCredential.user.uid), {
+              userName: userCredential.user.displayName ,
+              userPhoto: userCredential.user.photoURL
+            });
 
             toast.success("Wlcome to Gracias", {
               position: "top-center",
