@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./AllUserCompo.css";
 import CommonUser from "../Common/CommonUser/CommonUser";
 import CommonButtonV1 from "../Common/CommonButton/CommonButtonV1";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, set } from "firebase/database";
+import { useSelector } from "react-redux";
 
 const AllUserCompo = () => {
   // redux data
+  const reduxUser = useSelector((state) => state.currentUser.value);
 
   // state variable
   const [allUsersData, setAllUsersData] = useState([]);
@@ -14,17 +16,27 @@ const AllUserCompo = () => {
   const db = getDatabase();
 
   // Function Part
+  const handleAdd = (data)=>{
+    console.log(data)
+    set(ref(db, 'users/' ), {
+      
+    });
+  }
 
   // RealTime Data
   useEffect(() => {
     onValue(ref(db, "allusers/"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        arr.push(item.val());
+        if(item.key!=reduxUser.uid){
+          arr.push({...item.val(), key: item.key})
+        }
+        
       });
       setAllUsersData(arr);
     });
   }, []);
+  
 
   return (
     <>
@@ -34,7 +46,7 @@ const AllUserCompo = () => {
             All Users
           </h2>
           {allUsersData.map((item) => (
-            <div className="single_user mb-6 flex justify-evenly">
+            <div key={item.key} className="single_user mb-6 flex justify-evenly">
               <div>
                 <CommonUser
                   commonUserPhoto={item.userPhoto}
@@ -42,7 +54,7 @@ const AllUserCompo = () => {
                 />
               </div>
               <div className="flex gap-6">
-                <CommonButtonV1 Common_Button_V1_content={"ADD FRIEND"} />
+                <CommonButtonV1 Common_Button_V1_Click={()=>handleAdd(item)} Common_Button_V1_content={"ADD FRIEND"} />
                 <CommonButtonV1 Common_Button_V1_content={"REMOVED"} />
               </div>
             </div>
