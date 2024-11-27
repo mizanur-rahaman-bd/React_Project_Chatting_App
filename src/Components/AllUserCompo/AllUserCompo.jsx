@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AllUserCompo.css";
 import CommonUser from "../Common/CommonUser/CommonUser";
 import CommonButtonV1 from "../Common/CommonButton/CommonButtonV1";
-import { getDatabase, ref, onValue, set } from "firebase/database";
+import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import { useSelector } from "react-redux";
 
 const AllUserCompo = () => {
@@ -16,27 +16,29 @@ const AllUserCompo = () => {
   const db = getDatabase();
 
   // Function Part
-  const handleAdd = (data)=>{
-    console.log(data)
-    set(ref(db, 'users/' ), {
-      
+  const handleAdd = (data) => {
+    set(push(ref(db, "friendRequest/")), {
+      senderID: reduxUser.uid,
+      senderName: reduxUser.displayName,
+      senderPhoto: reduxUser.photoURL,
+      receiverID: data.key,
+      receiverName: data.userName,
+      receiverPhoto: data.userPhoto,
     });
-  }
+  };
 
   // RealTime Data
   useEffect(() => {
     onValue(ref(db, "allusers/"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if(item.key!=reduxUser.uid){
-          arr.push({...item.val(), key: item.key})
+        if (item.key != reduxUser.uid) {
+          arr.push({ ...item.val(), key: item.key });
         }
-        
       });
       setAllUsersData(arr);
     });
   }, []);
-  
 
   return (
     <>
@@ -46,7 +48,10 @@ const AllUserCompo = () => {
             All Users
           </h2>
           {allUsersData.map((item) => (
-            <div key={item.key} className="single_user mb-6 flex justify-evenly">
+            <div
+              key={item.key}
+              className="single_user mb-6 flex justify-evenly"
+            >
               <div>
                 <CommonUser
                   commonUserPhoto={item.userPhoto}
@@ -54,7 +59,10 @@ const AllUserCompo = () => {
                 />
               </div>
               <div className="flex gap-6">
-                <CommonButtonV1 Common_Button_V1_Click={()=>handleAdd(item)} Common_Button_V1_content={"ADD FRIEND"} />
+                <CommonButtonV1
+                  Common_Button_V1_Click={() => handleAdd(item)}
+                  Common_Button_V1_content={"ADD FRIEND"}
+                />
                 <CommonButtonV1 Common_Button_V1_content={"REMOVED"} />
               </div>
             </div>
