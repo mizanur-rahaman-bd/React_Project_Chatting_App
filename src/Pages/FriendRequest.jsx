@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import FriendReqCompo from "../Components/FriendReqCompo/FriendReqCompo";
 
 const FriendRequest = () => {
   return (
-    <div>FriendRequest</div>
-  )
-}
+    <>
+      <FriendReqCompo />
+    </>
+  );
+};
 
-export default FriendRequest
+export default FriendRequest;

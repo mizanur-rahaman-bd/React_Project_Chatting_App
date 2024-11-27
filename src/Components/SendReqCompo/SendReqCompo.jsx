@@ -4,7 +4,7 @@ import CommonButtonV1 from "../Common/CommonButton/CommonButtonV1";
 import { useSelector } from "react-redux";
 import { getDatabase, ref, onValue } from "firebase/database";
 
-const FriendReqCompo = () => {
+const SendReqCompo = () => {
   // REDUX DATA
   const reduxUser = useSelector((state) => state.currentUser.value);
 
@@ -22,9 +22,9 @@ const FriendReqCompo = () => {
     onValue(ref(db, "friendRequest/"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if(item.val().receiverID == reduxUser.uid){
-            arr.push({...item.val(), key: item.key})
-        }
+       if(item.val().senderID == reduxUser.uid){
+        arr.push({...item.val(), key:item.key})
+       }
         
       });
       setAllReq(arr);
@@ -36,16 +36,16 @@ const FriendReqCompo = () => {
       <section className="friendReqCompo">
         <div className="container">
           <h2 className="text-3xl text-black font-bold mt-10 mb-5 text-center">
-            FRIEND REQUEST
+            SEND REQUEST
           </h2>
 
           {allreq.map((item) => (
             <div className="single_user mb-6 flex justify-evenly">
               <div>
-                <CommonUser commonUserName={item.senderName} commonUserPhoto={item.senderPhoto} />
+                <CommonUser commonUserName={item.receiverName} commonUserPhoto={item.receiverPhoto} />
               </div>
               <div className="flex gap-6">
-                <CommonButtonV1 Common_Button_V1_content={"CONFIRM"} />
+                {/* <CommonButtonV1 Common_Button_V1_content={"CONFIRM"} /> */}
                 <CommonButtonV1 Common_Button_V1_content={"CANCEL"} />
               </div>
             </div>
@@ -56,4 +56,4 @@ const FriendReqCompo = () => {
   );
 };
 
-export default FriendReqCompo;
+export default SendReqCompo;

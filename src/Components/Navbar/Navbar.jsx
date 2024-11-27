@@ -8,6 +8,7 @@ import { HiUsers } from "react-icons/hi2";
 import { BiSolidMessageDetail } from "react-icons/bi";
 import { IoLogOut } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import { RiUserShared2Fill } from "react-icons/ri";
 
 const Navbar = () => {
   // Variable
@@ -29,8 +30,11 @@ const Navbar = () => {
         <Link to={"/allusers"}>
           <FaUser />
         </Link>
-        <Link to={""}>
+        <Link to={"/friendreq"}>
           <FaUserPlus />
+        </Link>
+        <Link to={'/sendreq'}>
+        <RiUserShared2Fill />
         </Link>
         <Link to={""}>
           <FaUserAltSlash />
