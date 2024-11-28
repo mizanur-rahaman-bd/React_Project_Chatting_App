@@ -45,7 +45,7 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <Link to={""}>
+        <Link to={"/friends"}>
           <HiUsers />
         </Link>
         <Link to={""}>

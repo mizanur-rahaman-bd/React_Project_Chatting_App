@@ -4,51 +4,52 @@ import CommonButtonV1 from "../Common/CommonButton/CommonButtonV1";
 import { useSelector } from "react-redux";
 import { getDatabase, ref, onValue } from "firebase/database";
 
-const SendReqCompo = () => {
+const FriendCompo = () => {
   // REDUX DATA
-  const reduxUser = useSelector((state) => state.currentUser.value);
+  const sliceUser = useSelector((state) => state.currentUser.value);
 
-  // ALL VARIABLES
-  const [allreq, setAllReq] = useState([]);
+  // Variable Part
+  const [allFriends, setAllFriends] = useState([]);
 
-  // FIREBASE VARIABLES
+  // FireBase Variable
   const db = getDatabase();
 
-  // ALL FUNCTIONS
+  // All Function
 
-  // REAL TIME DATA BASE
-
+  // Real Time Data Base
   useEffect(() => {
-    onValue(ref(db, "friendRequest/"), (snapshot) => {
+    onValue(ref(db, "friends/"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if (item.val().senderID == reduxUser.uid) {
+        if (item.val().currentUserID == sliceUser.uid) {
           arr.push({ ...item.val(), key: item.key });
         }
       });
-      setAllReq(arr);
+      setAllFriends(arr);
     });
   }, []);
 
   return (
     <>
-      <section className="friendReqCompo">
+      <section className="friendCompo">
         <div className="container">
           <h2 className="text-3xl text-black font-bold mt-10 mb-5 text-center">
-            SEND REQUEST
+            All FRIENDS
           </h2>
-
-          {allreq.map((item) => (
-            <div className="single_user mb-6 flex justify-evenly">
+          {allFriends.map((item) => (
+            <div
+              key={item.key}
+              className="single_user mb-6 flex justify-evenly"
+            >
               <div>
                 <CommonUser
-                  commonUserName={item.receiverName}
-                  commonUserPhoto={item.receiverPhoto}
+                  commonUserName={item.friendName}
+                  commonUserPhoto={item.friendPhoto}
                 />
               </div>
               <div className="flex gap-6">
-                {/* <CommonButtonV1 Common_Button_V1_content={"CONFIRM"} /> */}
-                <CommonButtonV1 Common_Button_V1_content={"CANCEL"} />
+                <CommonButtonV1 Common_Button_V1_content={"UNFRIEND"} />
+                <CommonButtonV1 Common_Button_V1_content={"BLOCK"} />
               </div>
             </div>
           ))}
@@ -58,4 +59,4 @@ const SendReqCompo = () => {
   );
 };
 
-export default SendReqCompo;
+export default FriendCompo;
