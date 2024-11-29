@@ -48,7 +48,7 @@ const Navbar = () => {
         <Link to={"/friends"}>
           <HiUsers />
         </Link>
-        <Link to={""}>
+        <Link to={"/msg"}>
           <BiSolidMessageDetail />
         </Link>
         <button className="button" onClick={handleLogOut}>
