@@ -25,7 +25,7 @@ const FriendReqCompo = () => {
   const handleRemove = (reqData) => {
     remove(ref(db, "friendRequest/" + reqData.key));
   };
-  const handleConfirm = (friendData) => {
+ const handleConfirm = (friendData) => {
     set(push(ref(db, "friends/")), {
       friendID: friendData.senderID,
       friendPhoto: friendData.senderPhoto,
@@ -35,7 +35,7 @@ const FriendReqCompo = () => {
       currentUserName: reduxUser.displayName,
     });
     remove(ref(db, "friendRequest/" + friendData.key));
-  };
+  }; 
 
   // REAL TIME DATA BASE
 

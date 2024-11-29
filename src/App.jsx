@@ -17,6 +17,7 @@ import AllUserPage from "./Pages/AllUserPage";
 import FriendRequest from "./Pages/FriendRequest";
 import SendReqPage from "./Pages/SendReqPage";
 import FriendPage from "./Pages/FriendPage";
+import BlockUserPage from "./Pages/BlockUserPage";
 
 function App() {
   const myRoute = createBrowserRouter(
@@ -28,6 +29,7 @@ function App() {
           <Route path="/friendreq" element={<FriendRequest />} />
           <Route path="/sendreq" element={<SendReqPage />} />
           <Route path="/friends" element={<FriendPage />} />
+          <Route path="/blockuser" element={<BlockUserPage />} />
         </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>

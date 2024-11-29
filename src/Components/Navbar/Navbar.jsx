@@ -33,10 +33,10 @@ const Navbar = () => {
         <Link to={"/friendreq"}>
           <FaUserPlus />
         </Link>
-        <Link to={'/sendreq'}>
-        <RiUserShared2Fill />
+        <Link to={"/sendreq"}>
+          <RiUserShared2Fill />
         </Link>
-        <Link to={""}>
+        <Link to={"/blockuser"}>
           <FaUserAltSlash />
         </Link>
         <Link to={"/"}>
